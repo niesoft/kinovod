@@ -36,9 +36,7 @@ var kinovod = {
 	show: function(index, update)
 	{
 		this.setSite("kinovod" + index + ".cc");
-		if (this.update) {
-			this.setFooter("Предыдущее обновление: <strong>" + update + "</strong>");
-		}
+		this.setFooter("Предыдущее обновление: <strong>" + update + "</strong>");
 	},
 	setSite: function(domain)
 	{
