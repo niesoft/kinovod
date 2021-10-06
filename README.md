@@ -5,7 +5,7 @@
 
 # Установка:
 1. Скачиваем и распаковываем архив
-2. Вводим в браузере адрес: chrome://extensions/
+2. Вводим в браузере адрес: [chrome://extensions/](chrome://extensions/)
 3. В верхнем правом углу включаем режим разработчика
 
 ![image](https://user-images.githubusercontent.com/16869913/136179816-29d7441f-3dec-4c0f-a6e3-733057a84643.png)
