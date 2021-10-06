@@ -1,6 +1,4 @@
 var kinovod = {
-	index: 300,
-	update: undefined,
 	updateButton: null,
 	start: function()
 	{
@@ -8,11 +6,9 @@ var kinovod = {
 		if (this.updateButton) {
 			this.updateButton.onclick = (e) => this.updateIndex();
 		}
-		this.setSite("kinovod" + this.index + ".cc");
-		if (!this.update) {
-			this.setFooter("Обновление...");
-			this.updateIndex();
-		}
+		this.setSite("kinovod.cc");
+		this.setFooter("Обновление...");
+		this.updateIndex();
 	},
 	updateIndex: function()
 	{
@@ -25,7 +21,7 @@ var kinovod = {
 			if (isJson(req.responseText)) {
 				let json = JSON.parse(req.responseText);
 				if (json.index && json.update) {
-					this.save(json.index, json.update);
+					this.show(json.index, json.update);
 				}else{
 					this.setFooter("Ошибка при обновлении адреса.");
 				}
@@ -37,10 +33,8 @@ var kinovod = {
 		}
 
 	},
-	save: function(index, update)
+	show: function(index, update)
 	{
-		this.index = index;
-		this.update = update;
 		this.setSite("kinovod" + index + ".cc");
 		if (this.update) {
 			this.setFooter("Предыдущее обновление: <strong>" + update + "</strong>");
@@ -53,13 +47,6 @@ var kinovod = {
 			href.setAttribute("href", "http://" + domain);
 			href.innerHTML = domain;
 		}
-	},
-	getLast: function()
-	{
-		let index = getCookie("index");
-		let update = getCookie('update');
-		console.log(document.cookie);
-		return [index ? index : this.index, update];
 	},
 	setFooter: function(text)
 	{
