@@ -42,7 +42,7 @@ var kinovod = {
 	{
 		let href = document.querySelector(".kinovod .title a");
 		if (href) {
-			href.setAttribute("href", "http://" + domain);
+			href.setAttribute("href", "https://" + domain);
 			href.innerHTML = domain;
 		}
 	},
