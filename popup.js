@@ -2,67 +2,22 @@ var kinovod = {
 	updateButton: null,
 	start: function()
 	{
-		this.updateButton = document.querySelector(".kinovod .title > span");
-		if (this.updateButton) {
-			this.updateButton.onclick = (e) => this.updateIndex();
-		}
-		this.setSite("kinovod.cc");
-		this.setFooter("Обновление...");
-		this.updateIndex();
+		this.getDate();
 	},
-	updateIndex: function()
+	getDate: function()
 	{
-		this.updateButton.classList.add("selected");
-		let req = new XMLHttpRequest();
-		req.open("GET", "https://tools.niesoft.ru/kinovod/current", true);
-		req.send(null);
-		req.onreadystatechange = (e) => {
-			if (req.readyState != 4) return;
-			if (isJson(req.responseText)) {
-				let json = JSON.parse(req.responseText);
-				if (json.index && json.update) {
-					this.show(json.index, json.update);
-				}else{
-					this.setFooter("Ошибка при обновлении адреса.");
-				}
-				this.updateButton.classList.remove("selected");
-			}else{
-				this.setFooter("Ошибка при обновлении адреса.");
-				this.updateButton.classList.remove("selected");
-			}
-		}
-
-	},
-	show: function(index, update)
-	{
-		this.setSite("kinovod" + index + ".cc");
-		this.setFooter("Предыдущее обновление: <strong>" + update + "</strong>");
-	},
-	setSite: function(domain)
-	{
+		let today = new	Date();
+		var dd = String(today.getDate()).padStart(2, '0');
+		var mm = String(today.getMonth() + 1).padStart(2, '0');
+		var yy = today.getFullYear();
+		let domain = "kinovod" +  dd + mm + yy.toString().substring(2) + ".cc";
 		let href = document.querySelector(".kinovod .title a");
 		if (href) {
-			href.setAttribute("href", "https://" + domain);
+			href.setAttribute("href", "http://" + domain);
 			href.innerHTML = domain;
-		}
-	},
-	setFooter: function(text)
-	{
-		let footer = document.querySelector(".kinovod .footer");
-		if (footer) {
-			footer.innerHTML = text;
 		}
 	}
 };
-
-function isJson(str) {
-	try {
-		JSON.parse(str);
-	} catch (e) {
-		return false;
-	}
-	return true;
-}
 
 
 document.addEventListener('DOMContentLoaded', function(){
